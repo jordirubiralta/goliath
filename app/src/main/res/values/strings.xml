@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">GNB</string>
+    <string name="app_name_complete">Goliath National Bank</string>
+    <string name="total">Total:</string>
+</resources>
