@@ -2,6 +2,10 @@ package com.jrubiralta.goliath.di
 
 import android.content.Context
 import com.github.salomonbrys.kodein.*
+import com.jrubiralta.data.network.*
+import com.jrubiralta.data.repository.GNBTransactionRepository
+import com.jrubiralta.domain.interactor.transactions.GetTransactionsUseCase
+import com.jrubiralta.domain.repository.TransactionRepository
 import com.jrubiralta.goliath.BuildConfig
 import com.jrubiralta.goliath.domain.constants.BuildType
 import com.jrubiralta.goliath.domain.constants.buildType
@@ -20,13 +24,20 @@ fun appModule(context: Context) = Kodein.Module {
 }
 
 val domainModule = Kodein.Module {
-
+    bind() from provider { GetTransactionsUseCase(repository = instance(), executor = instance()) }
 }
 
 val dataModule = Kodein.Module {
     //Preferences
     //Database
-    // Api Services
+    //Api Services
+    bind<Network>() with singleton {
+        AppNetwork(
+            apiService = createService(endPoint = ApiService.ENDPOINT_1, authInterceptor = BasicAuthInterceptor(), ignoreSSL = true)
+        )
+    }
     //Data sources
     //Repository
+    bind<TransactionRepository>() with singleton { GNBTransactionRepository(network = instance()) }
+
 }

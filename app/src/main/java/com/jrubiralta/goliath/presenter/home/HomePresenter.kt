@@ -6,4 +6,6 @@ import com.jrubiralta.goliath.ui.view.home.HomeView
 interface HomePresenter
     : BasePresenter<HomeView> {
 
+    fun getTransactions()
+
 }

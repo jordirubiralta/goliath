@@ -1,5 +1,6 @@
 package com.jrubiralta.goliath.domain.interactor
 
+import com.jrubiralta.domain.model.Transaction
 import com.jrubiralta.goliath.domain.executor.Executor
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
@@ -9,9 +10,10 @@ abstract class ObservableInteractor<T : Any>(
         private val executor: Executor,
         private val compositeDisposable: CompositeDisposable = CompositeDisposable()) {
 
-    fun execute(onNext: (T) -> Unit,
-                onComplete: () -> Unit,
-                onError: (Throwable) -> Unit): Observable<T> {
+    fun execute(
+        onNext: (T) -> Unit,
+        onComplete: (Transaction) -> Unit,
+        onError: (Throwable) -> Unit): Observable<T> {
         val observable = buildObservable()
                 .subscribeOn(executor.new())
                 .observeOn(executor.main())
