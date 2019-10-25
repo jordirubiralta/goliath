@@ -1,6 +1,7 @@
 package com.jrubiralta.goliath.ui.activity.home
 
 import android.os.Bundle
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.salomonbrys.kodein.Kodein
 import com.github.salomonbrys.kodein.bind
 import com.github.salomonbrys.kodein.instance
@@ -11,6 +12,7 @@ import com.jrubiralta.goliath.model.TransactionListItemView
 import com.jrubiralta.goliath.presenter.home.HomePresenter
 import com.jrubiralta.goliath.presenter.home.HomePresenterImpl
 import com.jrubiralta.goliath.ui.activity.BaseActivity
+import com.jrubiralta.goliath.ui.adapter.TransactionListAdapter
 import com.jrubiralta.goliath.ui.view.home.HomeView
 import kotlinx.android.synthetic.main.activity_home.*
 
@@ -31,6 +33,8 @@ class HomeActivity
         }
     }
 
+    private val transactionListAdapter = TransactionListAdapter()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         init()
@@ -43,18 +47,22 @@ class HomeActivity
     }
 
     private fun initView() {
+        rv.adapter = transactionListAdapter
+        rv.layoutManager = LinearLayoutManager(applicationContext)
     }
 
     private fun initListeners() {
     }
 
     private fun initData() {
-
+        val list = mutableListOf<TransactionListItemView>()
+        list.add(TransactionListItemView(sku = "AAA", amount = 2.3, currency = CurrencyType.EUR))
+        list.add(TransactionListItemView(sku = "AAA", amount = 2.3, currency = CurrencyType.EUR))
+        list.add(TransactionListItemView(sku = "AAA", amount = 2.3, currency = CurrencyType.EUR))
+        list.add(TransactionListItemView(sku = "AAA", amount = 2.3, currency = CurrencyType.EUR))
+        transactionListAdapter.replace(list)
     }
 
-    override fun onBackPressed() {
-
-    }
 }
 
 interface HomeListener {

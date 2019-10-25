@@ -1,6 +1,6 @@
 package com.jrubiralta.goliath.ui.adapter
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,9 +15,11 @@ abstract class BaseAdapter<T>(
 
     abstract fun viewHolder(view: View): BaseAdapter.BaseViewHolder<T>
 
-    override fun getItemCount(): Int = items.size
+    override fun getItemCount(): Int {
+        return items.size
+    }
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): BaseViewHolder<T> {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<T> {
         val view = LayoutInflater.from(parent?.context).inflate(itemLayoutId, parent, false)
 
         val viewHolder = viewHolder(view)
@@ -26,7 +28,7 @@ abstract class BaseAdapter<T>(
         return viewHolder
     }
 
-    override fun onBindViewHolder(holder: BaseViewHolder<T>?, position: Int) {
+    override fun onBindViewHolder(holder: BaseViewHolder<T>, position: Int) {
         holder?.bind(items[position])
     }
 
@@ -77,7 +79,7 @@ abstract class BaseAdapter<T>(
 
     abstract class BaseViewHolder<in T>(itemView: View,
                                         var onItemClickListener: (Int) -> Unit = {},
-                                        var onLongClickListener: (Int) -> Unit = {}) : RecyclerView.ViewHolder(itemView) {
+                                        var onLongClickListener: (Int) -> Unit = {}) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
 
         init {
             itemView.setOnClickListener { onItemClickListener(adapterPosition) }

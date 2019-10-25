@@ -2,8 +2,8 @@ package com.jrubiralta.goliath.ui.activity
 
 import android.content.Context
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
 import com.github.salomonbrys.kodein.Kodein
 import com.github.salomonbrys.kodein.KodeinInjected
 import com.github.salomonbrys.kodein.KodeinInjector
@@ -69,14 +69,14 @@ abstract class BaseActivity<P, V>
         presenter.destroy()
     }
 
-    protected open fun replaceFragment(containerId: Int, fragment: Fragment) {
+    protected open fun replaceFragment(containerId: Int, fragment: androidx.fragment.app.Fragment) {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(containerId, fragment)
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
     }
 
-    protected open fun removeFragment(fragment: Fragment) {
+    protected open fun removeFragment(fragment: androidx.fragment.app.Fragment) {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.remove(fragment)
         fragmentTransaction.commitAllowingStateLoss()

@@ -73,11 +73,11 @@ ext {
             okthttp             : "com.squareup.okhttp3:okhttp:${okthttpVersion}",
             loggingInterceptor  : "com.squareup.okhttp3:logging-interceptor:${okthttpVersion}",
             rxJavaCallAdapter   : "com.squareup.retrofit2:adapter-rxjava2:${rxJavaCallAdapterVersion}",
-            appCompat_v7        : "com.android.support:appcompat-v7:${supportVersion}",
+            appCompat_v7        : 'androidx.appcompat:appcompat:1.0.0',
             support_v4          : "com.android.support:support-v4:${supportVersion}",
-            design              : "com.android.support:design:${supportVersion}",
+            design              : 'com.google.android.material:material:1.0.0',
             layout              : "com.android.support.constraint:constraint-layout:${constraintVersion}",
-            cardView            : "com.android.support:cardview-v7:${supportVersion}",
+            cardView            : 'androidx.cardview:cardview:1.0.0',
             customTabs          : "com.android.support:customtabs:${supportVersion}",
             kodein              : "com.github.salomonbrys.kodein:kodein:${kodeinVersion}",
             kodeinAndroid       : "com.github.salomonbrys.kodein:kodein-android:${kodeinVersion}",
@@ -112,8 +112,8 @@ ext {
             mockitoAndroid : "org.mockito:mockito-android:${mockitoVersion}",
             mockitoKotlin  : "com.nhaarman:mockito-kotlin:${mockitoKotlinVersion}",
             roboelectric   : "org.robolectric:robolectric:${robolectricVersion}",
-            espressoCore   : "com.android.support.test.espresso:espresso-core:${espressoCoreVersion}",
-            espresso       : "com.android.support.test:runner:${espressoVersion}",
+            espressoCore   : 'androidx.test.espresso:espresso-core:3.1.0',
+            espresso       : 'androidx.test:runner:1.1.0',
             espressoContrib: "com.android.support.test.espresso:espresso-contrib:${espressoCoreVersion}"
     ]
 

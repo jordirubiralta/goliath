@@ -14,15 +14,16 @@
                 android:name="com.jrubiralta.goliath.ui.activity.splash.SplashActivity"
                 android:screenOrientation="behind"
                 android:theme="@style/AppTheme">
+        </activity>
+        <activity android:name="com.jrubiralta.goliath.ui.activity.home.HomeActivity"
+                android:screenOrientation="behind"
+                android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        </intent-filter>
         </activity>
-        <activity android:name="com.jrubiralta.goliath.ui.activity.home.HomeActivity"
-                android:screenOrientation="behind"
-                android:theme="@style/AppTheme"/>
 
     </application>
 </manifest>
