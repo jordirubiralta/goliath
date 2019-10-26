@@ -7,7 +7,9 @@ class AppNetwork(
     private val apiService: ApiService)
     : Network {
 
-    override fun getTransaction(): Single<TransactionListDTO> = apiService.getTransaction()
+    override fun getTransaction(): Single<TransactionListDTO> {
+        return apiService.getTransaction()
+    }
 
 
 }

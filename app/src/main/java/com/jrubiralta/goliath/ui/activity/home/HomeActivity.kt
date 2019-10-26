@@ -9,6 +9,8 @@ import com.github.salomonbrys.kodein.Kodein
 import com.github.salomonbrys.kodein.bind
 import com.github.salomonbrys.kodein.instance
 import com.github.salomonbrys.kodein.provider
+import com.jrubiralta.domain.interactor.transactions.GetTransactionsUseCase
+import com.jrubiralta.domain.model.TransactionList
 import com.jrubiralta.goliath.R
 import com.jrubiralta.goliath.model.CurrencyType
 import com.jrubiralta.goliath.model.TransactionListItemView
@@ -32,7 +34,8 @@ class HomeActivity
     override val activityModule: Kodein.Module = Kodein.Module {
         bind<HomePresenter>() with provider {
             HomePresenterImpl(
-                view = this@HomeActivity
+                view = this@HomeActivity,
+                getTransactionsUseCase = instance()
             )
         }
     }
@@ -67,12 +70,7 @@ class HomeActivity
     }
 
     private fun initData() {
-        val list = mutableListOf<TransactionListItemView>()
-        list.add(TransactionListItemView(sku = "AAA", amount = 2.3, currency = CurrencyType.EUR))
-        list.add(TransactionListItemView(sku = "AAA", amount = 2.3, currency = CurrencyType.EUR))
-        list.add(TransactionListItemView(sku = "AAA", amount = 2.3, currency = CurrencyType.EUR))
-        list.add(TransactionListItemView(sku = "AAA", amount = 2.3, currency = CurrencyType.EUR))
-        transactionListAdapter.replace(list)
+        presenter.getTransactions()
     }
 
     private val itemTransactionSelected = object : AdapterView.OnItemSelectedListener {
@@ -82,6 +80,10 @@ class HomeActivity
         }
         override fun onNothingSelected(arg0: AdapterView<*>) {}
 
+    }
+
+    override fun updateList(transactionList: TransactionList) {
+//        transactionListAdapter.replace(transactionList.list)
     }
 
 }

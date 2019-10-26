@@ -15,12 +15,9 @@ class HomePresenterImpl(
     }
 
     private fun executeGetTransactions() {
-        getTransactionsUseCase.execute(
-            onComplete = {
-
-            },
-            onNext = {
-
+        getTransactionsUseCase.execute(7,
+            onSuccess = {
+                view.updateList(it)
             },
             onError = {
 

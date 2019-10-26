@@ -18,7 +18,7 @@ class TransactionListAdapter
         override fun bind(model: TransactionListItemView) {
             itemView.tv_sku.text = model.sku
             itemView.tv_amount.text = model.amount.toString()
-            itemView.tv_currency.text = "EUR"
+            itemView.tv_currency.text = model.currency.toString()
         }
     }
 }

@@ -6,14 +6,14 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
 
 abstract class SingleInteractor<T : Any>(
-        private val executor: Executor,
-        private val compositeDisposable: CompositeDisposable = CompositeDisposable()) {
+    private val executor: Executor,
+    private val compositeDisposable: CompositeDisposable = CompositeDisposable()) {
 
     fun execute(onSuccess: (T) -> Unit,
                 onError: (Throwable) -> Unit): Single<T> {
         val single = buildSingle()
-                .subscribeOn(executor.new())
-                .observeOn(executor.main())
+            .subscribeOn(executor.new())
+            .observeOn(executor.main())
 
         val disposable = single.subscribeWith(object : DisposableSingleObserver<T>() {
             override fun onError(e: Throwable) {
