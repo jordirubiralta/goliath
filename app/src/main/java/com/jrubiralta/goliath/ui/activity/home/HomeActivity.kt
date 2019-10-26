@@ -9,11 +9,9 @@ import com.github.salomonbrys.kodein.Kodein
 import com.github.salomonbrys.kodein.bind
 import com.github.salomonbrys.kodein.instance
 import com.github.salomonbrys.kodein.provider
-import com.jrubiralta.domain.interactor.transactions.GetTransactionsUseCase
-import com.jrubiralta.domain.model.TransactionList
+import com.jrubiralta.domain.model.Transaction
 import com.jrubiralta.goliath.R
 import com.jrubiralta.goliath.model.CurrencyType
-import com.jrubiralta.goliath.model.TransactionListItemView
 import com.jrubiralta.goliath.presenter.home.HomePresenter
 import com.jrubiralta.goliath.presenter.home.HomePresenterImpl
 import com.jrubiralta.goliath.ui.activity.BaseActivity
@@ -82,10 +80,15 @@ class HomeActivity
 
     }
 
-    override fun updateList(transactionList: TransactionList) {
-//        transactionListAdapter.replace(transactionList.list)
+    override fun updateList(transactionList: List<Transaction>) {
+        transactionListAdapter.replace(transactionList.toMutableList())
     }
 
+    override fun sumTransactions(transactionList: List<Transaction>) {
+        var total = 0.0
+        transactionList.map { total += it.amount.toDouble() }
+        tv_total_sum.text = total.toString()
+    }
 }
 
 interface HomeListener {

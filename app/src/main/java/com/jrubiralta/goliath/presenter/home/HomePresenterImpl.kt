@@ -19,6 +19,7 @@ class HomePresenterImpl(
         getTransactionsUseCase.execute(
             onSuccess = {
                 view.updateList(it)
+                view.sumTransactions(it)
             },
             onError = {
                 Log.d("ERROR", it.toString())
