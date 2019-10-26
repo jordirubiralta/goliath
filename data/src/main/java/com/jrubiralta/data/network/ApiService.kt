@@ -7,7 +7,7 @@ import retrofit2.http.GET
 interface ApiService {
 
     companion object {
-        val ENDPOINT_1 = "http://quiet-stone-2094.herokuapp.com/"
+        val ENDPOINT_1 = "https://quiet-stone-2094.herokuapp.com/"
     }
 
     @GET("transactions.json")
