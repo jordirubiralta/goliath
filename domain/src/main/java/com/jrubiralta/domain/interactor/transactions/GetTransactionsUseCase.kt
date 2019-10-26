@@ -11,10 +11,7 @@ class GetTransactionsUseCase(
     executor: Executor)
     : SingleInteractor<TransactionList>(executor = executor) {
 
-    fun execute(test: Int, onSuccess: (TransactionList) -> Unit, onError: (Throwable) -> Unit) {
-        super.execute(onSuccess, onError)
+    fun execute(onSuccess: (TransactionList) -> Unit, onError: (Throwable) -> Unit) {
+        super.execute(onSuccess = onSuccess, onError = onError, single = repository.getTransaction())
     }
-
-    override fun buildSingle(): Single<TransactionList> = repository.getTransaction()
-
 }

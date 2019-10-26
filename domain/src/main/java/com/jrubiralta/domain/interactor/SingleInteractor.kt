@@ -10,30 +10,28 @@ abstract class SingleInteractor<T : Any>(
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()) {
 
     fun execute(onSuccess: (T) -> Unit,
-                onError: (Throwable) -> Unit): Single<T> {
-        val single = buildSingle()
+                onError: (Throwable) -> Unit,
+                single: Single<T>): Single<T> {
+        val singleWithSchedulers = single
             .subscribeOn(executor.new())
             .observeOn(executor.main())
 
-        val disposable = single.subscribeWith(object : DisposableSingleObserver<T>() {
-            override fun onError(e: Throwable) {
-                onError(e)
-            }
+        compositeDisposable.add(singleWithSchedulers
+            .subscribeWith(object : DisposableSingleObserver<T>() {
+                override fun onError(e: Throwable) {
+                    onError(e)
+                }
 
-            override fun onSuccess(t: T) {
-                onSuccess(t)
-            }
+                override fun onSuccess(t: T) {
+                    onSuccess(t)
+                }
 
-        })
+            }))
 
-        compositeDisposable.add(disposable)
-
-        return single
+        return singleWithSchedulers
     }
 
     fun clear() {
         compositeDisposable.clear()
     }
-
-    abstract fun buildSingle(): Single<T>
 }

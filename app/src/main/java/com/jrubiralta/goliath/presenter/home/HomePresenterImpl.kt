@@ -8,17 +8,16 @@ class HomePresenterImpl(
     view: HomeView,
     private val getTransactionsUseCase: GetTransactionsUseCase)
     : BasePresenterImpl<HomeView>(view),
-        HomePresenter {
+    HomePresenter {
 
     override fun getTransactions() {
         executeGetTransactions()
     }
 
     private fun executeGetTransactions() {
-        getTransactionsUseCase.execute(7,
-            onSuccess = {
-                view.updateList(it)
-            },
+        getTransactionsUseCase.execute(onSuccess = {
+            view.updateList(it)
+        },
             onError = {
 
             }
