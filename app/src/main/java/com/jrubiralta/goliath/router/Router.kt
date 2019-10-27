@@ -7,6 +7,7 @@ import com.jrubiralta.goliath.router.android.ProductNavParams
 import com.jrubiralta.goliath.ui.activity.home.HomeActivity
 import com.jrubiralta.goliath.ui.activity.product.ProductDetailActivity
 import android.os.Bundle
+import com.jrubiralta.domain.model.Transaction
 import java.io.Serializable
 
 

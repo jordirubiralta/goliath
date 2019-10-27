@@ -25,8 +25,7 @@ import kotlinx.android.synthetic.main.activity_home.*
 
 class ProductDetailActivity
     : BaseActivity<ProductDetailPresenter, ProductDetailView>(),
-    ProductDetailView,
-    ProductDetailListener {
+    ProductDetailView {
 
     companion object {
         const val KEY_LIST = "KEY_LIST"
@@ -39,7 +38,8 @@ class ProductDetailActivity
     override val activityModule: Kodein.Module = Kodein.Module {
         bind<ProductDetailPresenter>() with provider {
             ProductDetailPresenterImpl(
-                view = this@ProductDetailActivity)
+                view = this@ProductDetailActivity,
+                getRatesUseCase = instance())
         }
     }
 
@@ -67,11 +67,7 @@ class ProductDetailActivity
     }
 
     private fun initData() {
+        presenter.getRates()
     }
 
-
-
-}
-
-interface ProductDetailListener {
 }

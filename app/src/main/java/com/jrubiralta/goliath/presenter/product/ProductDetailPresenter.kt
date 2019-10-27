@@ -6,4 +6,5 @@ import com.jrubiralta.goliath.ui.view.product.ProductDetailView
 interface ProductDetailPresenter
     : BasePresenter<ProductDetailView> {
 
+    fun getRates()
 }

@@ -20,11 +20,12 @@ import com.jrubiralta.goliath.ui.activity.BaseActivity
 import com.jrubiralta.goliath.ui.adapter.ProductsListAdapter
 import com.jrubiralta.goliath.ui.view.home.HomeView
 import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.android.synthetic.main.activity_home.rv
+import kotlinx.android.synthetic.main.activity_products.*
 
 class HomeActivity
     : BaseActivity<HomePresenter, HomeView>(),
-        HomeView,
-        HomeListener {
+        HomeView {
 
     override val presenter: HomePresenter by instance()
 
@@ -87,7 +88,4 @@ class HomeActivity
         transactionList.map { total += it.amount.toDouble() }
         tv_total_sum.text = total.toString()
     }
-}
-
-interface HomeListener {
 }
