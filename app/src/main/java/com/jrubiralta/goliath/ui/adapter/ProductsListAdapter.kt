@@ -1,6 +1,5 @@
 package com.jrubiralta.goliath.ui.adapter
 
-import com.jrubiralta.domain.model.Transaction
 import com.jrubiralta.goliath.R
 import android.view.View
 import kotlinx.android.synthetic.main.item_product.view.*

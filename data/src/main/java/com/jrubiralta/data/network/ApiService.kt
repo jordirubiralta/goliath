@@ -1,5 +1,6 @@
 package com.jrubiralta.data.network
 
+import com.jrubiralta.data.model.RatesDTO
 import com.jrubiralta.data.model.TransactionDTO
 import io.reactivex.Single
 import retrofit2.http.GET
@@ -12,5 +13,9 @@ interface ApiService {
 
     @GET("transactions.json")
     fun getTransaction(): Single<List<TransactionDTO>>
+
+    @GET("rates.json")
+    fun getRates(): Single<List<RatesDTO>>
+
 
 }

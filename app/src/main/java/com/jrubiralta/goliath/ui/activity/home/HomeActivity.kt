@@ -15,6 +15,7 @@ import com.jrubiralta.goliath.presenter.home.HomePresenter
 import com.jrubiralta.goliath.presenter.home.HomePresenterImpl
 import com.jrubiralta.goliath.router.Router
 import com.jrubiralta.goliath.router.android.NavParams
+import com.jrubiralta.goliath.router.android.ProductNavParams
 import com.jrubiralta.goliath.ui.activity.BaseActivity
 import com.jrubiralta.goliath.ui.adapter.ProductsListAdapter
 import com.jrubiralta.goliath.ui.view.home.HomeView
@@ -38,8 +39,10 @@ class HomeActivity
         }
     }
 
+    private var listTransaction: List<Transaction> = emptyList()
+
     private val productsListAdapter = ProductsListAdapter() {
-        Router.openProductActivity(NavParams(this@HomeActivity, false))
+        Router.openProductActivity(ProductNavParams(this@HomeActivity, listTransaction, false))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -76,6 +79,7 @@ class HomeActivity
             if (!list.contains(id)) { list.add(id) }
         }
         productsListAdapter.replace(list)
+        listTransaction = transactionList
     }
 
     override fun sumTransactions(transactionList: List<Transaction>) {

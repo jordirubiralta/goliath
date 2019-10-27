@@ -27,6 +27,11 @@ class ProductDetailActivity
     : BaseActivity<ProductDetailPresenter, ProductDetailView>(),
     ProductDetailView,
     ProductDetailListener {
+
+    companion object {
+        const val KEY_LIST = "KEY_LIST"
+    }
+
     override val presenter: ProductDetailPresenter by instance()
 
     override val layoutResourceId = R.layout.activity_home
