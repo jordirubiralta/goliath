@@ -18,8 +18,8 @@ class HomePresenterImpl(
     private fun executeGetTransactions() {
         getTransactionsUseCase.execute(
             onSuccess = {
-                view.updateList(it)
-                view.sumTransactions(it)
+                val list = view.sortList(it)
+                view.updateList(list)
             },
             onError = {
                 Log.d("ERROR", it.toString())
