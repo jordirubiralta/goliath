@@ -8,4 +8,5 @@ interface DatabaseDataSource {
     fun saveTransactions(list: List<Transaction>): Single<Int>
     fun getTransactions(): Maybe<List<Transaction>>
     fun clearAllDataBase(): Single<Boolean>
+    fun getProductTransactions(sku: String): Maybe<List<Transaction>>
 }

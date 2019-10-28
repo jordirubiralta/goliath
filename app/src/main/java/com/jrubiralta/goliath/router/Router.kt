@@ -20,6 +20,7 @@ object Router {
 
     fun openProductActivity(params: ProductNavParams) {
         val intent = Intent(params.activity, ProductDetailActivity::class.java)
+        intent.putExtra(ProductDetailActivity.KEY_SKU, params.sku)
         openActivity(params.activity, intent, params.finishActivity)
     }
 

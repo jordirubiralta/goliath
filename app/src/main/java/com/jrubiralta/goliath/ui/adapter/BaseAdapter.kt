@@ -79,7 +79,7 @@ abstract class BaseAdapter<T>(
 
     abstract class BaseViewHolder<in T>(itemView: View,
                                         var onItemClickListener: (Int) -> Unit = {},
-                                        var onLongClickListener: (Int) -> Unit = {}) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
+                                        var onLongClickListener: (Int) -> Unit = {}) : RecyclerView.ViewHolder(itemView) {
 
         init {
             itemView.setOnClickListener { onItemClickListener(adapterPosition) }

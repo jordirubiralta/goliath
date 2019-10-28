@@ -11,4 +11,5 @@ interface TransactionRepository {
     fun saveTransactions(list: List<Transaction>): Single<Int>
     fun getTransactionsFromDB(): Maybe<List<Transaction>>
     fun clearAllDataBase(): Single<Boolean>
+    fun getProductTransactionsFromDB(sku: String): Maybe<List<Transaction>>
 }

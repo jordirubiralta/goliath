@@ -5,7 +5,7 @@ import com.jrubiralta.domain.model.Transaction
 
 class ProductNavParams(
     activity: Activity,
-    val list: List<Transaction>,
+    val sku: String,
     finishActivity: Boolean = true)
     : NavParams(activity, finishActivity) {
 }

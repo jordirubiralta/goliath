@@ -19,8 +19,8 @@ import com.jrubiralta.goliath.router.android.ProductNavParams
 import com.jrubiralta.goliath.ui.activity.BaseActivity
 import com.jrubiralta.goliath.ui.adapter.ProductsListAdapter
 import com.jrubiralta.goliath.ui.view.home.HomeView
-import kotlinx.android.synthetic.main.activity_home.*
-import kotlinx.android.synthetic.main.activity_home.rv
+import kotlinx.android.synthetic.main.activity_product_detail.*
+import kotlinx.android.synthetic.main.activity_product_detail.rv
 import kotlinx.android.synthetic.main.activity_products.*
 
 class HomeActivity
@@ -42,8 +42,8 @@ class HomeActivity
 
     private var listTransaction: List<Transaction> = emptyList()
 
-    private val productsListAdapter = ProductsListAdapter() {
-        Router.openProductActivity(ProductNavParams(this@HomeActivity, listTransaction, false))
+    private val productsListAdapter = ProductsListAdapter {
+        Router.openProductActivity(ProductNavParams(this@HomeActivity, it, false))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -81,11 +81,5 @@ class HomeActivity
         }
         productsListAdapter.replace(list)
         listTransaction = transactionList
-    }
-
-    override fun sumTransactions(transactionList: List<Transaction>) {
-        var total = 0.0
-        transactionList.map { total += it.amount.toDouble() }
-        tv_total_sum.text = total.toString()
     }
 }

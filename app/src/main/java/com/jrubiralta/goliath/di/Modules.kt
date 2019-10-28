@@ -31,6 +31,7 @@ val domainModule = Kodein.Module {
     bind() from provider { SaveTransactionsUseCase(repository = instance(), executor = instance()) }
     bind() from provider { GetTransactionsDBUseCase(repository = instance(), executor = instance()) }
     bind() from provider { ClearAllDataBaseUseCase(repository = instance(), executor = instance()) }
+    bind() from provider { GetProductTransactionsUseCase(repository = instance(), executor = instance()) }
 }
 
 val dataModule = Kodein.Module {

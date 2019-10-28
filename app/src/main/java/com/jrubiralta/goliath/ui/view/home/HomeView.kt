@@ -7,5 +7,4 @@ interface HomeView
     : View {
     fun sortList(transactionList: List<Transaction>): List<Transaction>
     fun updateList(transactionList: List<Transaction>)
-    fun sumTransactions(transactionList: List<Transaction>)
 }

@@ -31,4 +31,8 @@ class GNBTransactionRepository(
     override fun clearAllDataBase(): Single<Boolean> {
         return database.clearAllDataBase()
     }
+
+    override fun getProductTransactionsFromDB(sku: String): Maybe<List<Transaction>> {
+        return database.getProductTransactions(sku)
+    }
 }

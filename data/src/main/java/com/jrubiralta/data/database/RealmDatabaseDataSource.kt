@@ -15,7 +15,6 @@ import io.realm.Realm
 class RealmDatabaseDataSource : DatabaseDataSource {
 
     override fun saveTransactions(list: List<Transaction>): Single<Int> {
-//        removeAll(TransactionVO::class.java)
         var num = 0
         list.map {
             it.toVo().save()
@@ -42,4 +41,11 @@ class RealmDatabaseDataSource : DatabaseDataSource {
         return Single.just(true)
     }
 
+    override fun getProductTransactions(sku: String): Maybe<List<Transaction>> = RxRealm.getList {
+        it.where(TransactionVO::class.java)
+            .equalTo("sku", sku)
+            .findAll()
+        }
+        .map { list -> list.map { transaction -> transaction.toModel()}
+    }
 }
