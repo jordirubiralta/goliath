@@ -18,7 +18,21 @@ class ProductDetailPresenterImpl(
         executeGetRates()
     }
 
-    override fun setProductList() {
+    private fun executeGetRates() {
+        getRatesUseCase.execute(
+            onSuccess = {
+                view.setRatesList("AUD",it)
+                view.setRatesList("CAD",it)
+                view.setRatesList("USD",it)
+                setProductList()
+            },
+            onError = {
+                Log.d("ERROR", it.toString())
+            }
+        )
+    }
+
+    private fun setProductList() {
         val product = view.getProduct()
         getProductTransactionsUseCase.execute(product,
             onSuccess = {
@@ -30,17 +44,6 @@ class ProductDetailPresenterImpl(
             onError = {
                 Log.d("ERROR", it.toString())
             })
-    }
-
-    private fun executeGetRates() {
-        getRatesUseCase.execute(
-            onSuccess = {
-                Log.d("ERROR", it.toString())
-            },
-            onError = {
-                Log.d("ERROR", it.toString())
-            }
-        )
     }
 
 }

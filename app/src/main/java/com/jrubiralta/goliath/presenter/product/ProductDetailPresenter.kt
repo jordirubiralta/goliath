@@ -7,5 +7,4 @@ interface ProductDetailPresenter
     : BasePresenter<ProductDetailView> {
 
     fun getRates()
-    fun setProductList()
 }
