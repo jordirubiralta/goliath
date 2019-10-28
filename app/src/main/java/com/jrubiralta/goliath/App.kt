@@ -6,6 +6,7 @@ import com.github.salomonbrys.kodein.Kodein
 import com.jrubiralta.goliath.di.appModule
 import com.jrubiralta.goliath.di.dataModule
 import com.jrubiralta.goliath.di.domainModule
+import com.jrubiralta.util.realm.RealmMigrationUtil
 import io.realm.Realm
 import io.realm.RealmConfiguration
 
@@ -17,7 +18,10 @@ class App
     override fun onCreate() {
         super.onCreate()
         Realm.init(this)
-        val config = RealmConfiguration.Builder().build()
+        val config = RealmConfiguration.Builder()
+            .schemaVersion(2) // Must be bumped when the schema changes
+            .migration(RealmMigrationUtil())
+            .build()
         Realm.setDefaultConfiguration(config)
     }
 

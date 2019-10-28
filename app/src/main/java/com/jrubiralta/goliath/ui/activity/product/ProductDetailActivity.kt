@@ -12,6 +12,7 @@ import com.jrubiralta.domain.model.Rates
 import com.jrubiralta.domain.model.Transaction
 import com.jrubiralta.goliath.R
 import com.jrubiralta.goliath.domain.constants.Constants
+import com.jrubiralta.goliath.domain.constants.Constants.Companion.DEFAULT_DOUBLE
 import com.jrubiralta.goliath.model.CurrencyType
 import com.jrubiralta.goliath.presenter.product.ProductDetailPresenter
 import com.jrubiralta.goliath.presenter.product.ProductDetailPresenterImpl
@@ -19,6 +20,7 @@ import com.jrubiralta.goliath.ui.activity.BaseActivity
 import com.jrubiralta.goliath.ui.adapter.TransactionListAdapter
 import com.jrubiralta.goliath.ui.view.product.ProductDetailView
 import kotlinx.android.synthetic.main.activity_product_detail.*
+import java.math.RoundingMode
 
 class ProductDetailActivity
     : BaseActivity<ProductDetailPresenter, ProductDetailView>(),
@@ -75,23 +77,23 @@ class ProductDetailActivity
         var total = 0.0
         val finalList = mutableListOf<Transaction>()
         list.map {
-            var conversion = ""
+            var conversion: Double
             if (it.currency == "EUR") {
-                total += it.amount.toDouble()
+                total += it.amount
                 finalList.add(it)
             } else {
                 conversion = changeCurrencyToEur(it.amount, it.currency)
-                finalList.add(Transaction(it.currency, "EUR", conversion))
-                total += conversion.toDouble()
+                finalList.add(Transaction(it.sku, conversion, "EUR"))
+                total += conversion
             }
         }
-        tv_total_sum.text = total.toString()
+        tv_total_sum.text = total.toBigDecimal().setScale(2, RoundingMode.UP).toString()
         transactionListAdapter.replace(finalList)
     }
 
-    override fun changeCurrencyToEur(amount: String, currency: String): String {
-        val conversion = ratesList.filter { currency == it.from }.first().rate.toDouble() * amount.toDouble()
-        return "%.2f".format(conversion)
+    override fun changeCurrencyToEur(amount: Double, currency: String): Double {
+        val conversion = ratesList.filter { currency == it.from }.first().rate * amount
+        return conversion.toBigDecimal().setScale(2, RoundingMode.UP).toDouble()
     }
 
     override fun setRatesList(currency: String, list: List<Rates>) {
@@ -100,15 +102,15 @@ class ProductDetailActivity
         } else {
             val rate = list.filter { it.from == currency }.first()
             if (list.filter { it.from == rate.to && it.to == "EUR"}.isNotEmpty()) {
-                val conversion = rate.rate.toDouble()*
-                        list.filter { it.from == rate.to && it.to == "EUR"}.first().rate.toDouble()
-                ratesList.add(Rates(currency, "EUR", "%.2f".format(conversion)))
+                val conversion = rate.rate*
+                        list.filter { it.from == rate.to && it.to == "EUR"}.first().rate
+                ratesList.add(Rates(currency, "EUR", conversion.toBigDecimal().setScale(2, RoundingMode.UP).toDouble()))
             } else {
                 val rateAux = list.filter { it.from == rate.to && it.to != rate.from && it.to != currency}.first()
-                val conversion = rate.rate.toDouble()*
-                        rateAux.rate.toDouble()*
-                        list.filter { it.from == rateAux.to && it.to == "EUR" }.first().rate.toDouble()
-                ratesList.add(Rates(currency, "EUR", "%.2f".format(conversion)))
+                val conversion = rate.rate
+                        rateAux.rate
+                        list.filter { it.from == rateAux.to && it.to == "EUR" }.first().rate
+                ratesList.add(Rates(currency, "EUR", conversion.toBigDecimal().setScale(2, RoundingMode.UP).toDouble()))
             }
         }
     }

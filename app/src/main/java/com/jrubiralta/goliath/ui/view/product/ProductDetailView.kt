@@ -10,6 +10,6 @@ interface ProductDetailView
 
     fun getProduct(): String
     fun updateList(list: List<Transaction>)
-    fun changeCurrencyToEur(amount: String, currency: String): String
+    fun changeCurrencyToEur(amount: Double, currency: String): Double
     fun setRatesList(currency: String, list: List<Rates>)
 }
