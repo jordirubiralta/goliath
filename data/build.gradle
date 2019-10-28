@@ -1,5 +1,8 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'realm-android'
+
 
 android {
     compileSdkVersion rootProject.ext.androidCompileSdkVersion
@@ -41,6 +44,8 @@ dependencies {
 
     implementation dataDependencies.rxJava
     implementation dataDependencies.rxJavaCallAdapter
+    implementation dataDependencies.rxAndroid
+    implementation dataDependencies.aescrypt
 
     testImplementation dataTestDependencies.jUnit
     testImplementation dataTestDependencies.mockito

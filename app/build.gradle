@@ -1,6 +1,8 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'realm-android'
 
 android {
     compileSdkVersion rootProject.ext.androidCompileSdkVersion
@@ -46,6 +48,7 @@ dependencies {
 
     implementation appDependencies.rxJava
     implementation appDependencies.rxAndroid
+    implementation appDependencies.rxJavaCallAdapter
 
     testImplementation appTestDependencies.jUnit
     testImplementation appTestDependencies.mockito
