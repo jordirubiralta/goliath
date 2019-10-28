@@ -1,4 +1,4 @@
-package com.jrubiralta.data.model
+package com.jrubiralta.data.model.dto
 
 import com.google.gson.annotations.SerializedName
 

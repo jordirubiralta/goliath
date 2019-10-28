@@ -1,13 +1,15 @@
 package com.jrubiralta.goliath.presenter.home
 
 import android.util.Log
+import com.jrubiralta.domain.interactor.transactions.GetTransactionsDBUseCase
 import com.jrubiralta.domain.interactor.transactions.GetTransactionsUseCase
 import com.jrubiralta.goliath.presenter.BasePresenterImpl
 import com.jrubiralta.goliath.ui.view.home.HomeView
 
 class HomePresenterImpl(
     view: HomeView,
-    private val getTransactionsUseCase: GetTransactionsUseCase)
+    private val getTransactionsDBUseCase: GetTransactionsDBUseCase
+)
     : BasePresenterImpl<HomeView>(view),
     HomePresenter {
 
@@ -16,7 +18,10 @@ class HomePresenterImpl(
     }
 
     private fun executeGetTransactions() {
-        getTransactionsUseCase.execute(
+        getTransactionsDBUseCase.execute(
+            onEmpty = {
+                Log.d("ERROR", "EMPTY LIST")
+            },
             onSuccess = {
                 val list = view.sortList(it)
                 view.updateList(list)

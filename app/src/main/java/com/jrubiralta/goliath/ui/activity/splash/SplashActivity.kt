@@ -25,8 +25,10 @@ class SplashActivity
     override val activityModule: Kodein.Module = Kodein.Module {
         bind<SplashPresenter>() with provider {
             SplashPresenterImpl(
-                view = this@SplashActivity
-            )
+                view = this@SplashActivity,
+                clearAllDataBaseUseCase = instance(),
+                getTransactionsUseCase = instance(),
+                saveTransactionsUseCase = instance())
         }
     }
 
@@ -46,10 +48,10 @@ class SplashActivity
     }
 
     private fun initListeners() {
-        iv_splash.setOnClickListener { goToHomeActivity() }
     }
 
     private fun initData() {
+        presenter.clearDataBase()
     }
 
     override fun onBackPressed() {

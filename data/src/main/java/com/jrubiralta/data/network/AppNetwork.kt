@@ -1,7 +1,7 @@
 package com.jrubiralta.data.network
 
-import com.jrubiralta.data.model.RatesDTO
-import com.jrubiralta.data.model.TransactionDTO
+import com.jrubiralta.data.model.dto.RatesDTO
+import com.jrubiralta.data.model.dto.TransactionDTO
 import io.reactivex.Single
 
 class AppNetwork(

@@ -5,4 +5,7 @@ import com.jrubiralta.goliath.ui.view.splash.SplashView
 
 interface SplashPresenter
     : BasePresenter<SplashView> {
+
+    fun clearDataBase()
+
 }

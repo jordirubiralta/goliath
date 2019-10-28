@@ -1,7 +1,7 @@
 package com.jrubiralta.data.mapper
 
-import com.jrubiralta.data.model.RatesDTO
-import com.jrubiralta.data.model.TransactionDTO
+import com.jrubiralta.data.model.dto.RatesDTO
+import com.jrubiralta.data.model.dto.TransactionDTO
 import com.jrubiralta.domain.model.Rates
 import com.jrubiralta.domain.model.Transaction
 import com.jrubiralta.goliath.domain.constants.Constants

@@ -6,12 +6,12 @@ import com.jrubiralta.goliath.domain.executor.Executor
 import com.jrubiralta.goliath.domain.interactor.SingleInteractor
 import io.reactivex.Single
 
-class GetTransactionsUseCase(
+class SaveTransactionsUseCase(
     private val repository: TransactionRepository,
     executor: Executor)
-    : SingleInteractor<List<Transaction>>(executor = executor) {
+    : SingleInteractor<Int>(executor = executor) {
 
-    fun execute(onSuccess: (List<Transaction>) -> Unit, onError: (Throwable) -> Unit) {
-        super.execute(onSuccess = onSuccess, onError = onError, single = repository.getTransaction())
+    fun execute(list: List<Transaction>, onSuccess: (Int) -> Unit, onError: (Throwable) -> Unit) {
+        super.execute(onSuccess = onSuccess, onError = onError, single = Single.defer {repository.saveTransactions(list)})
     }
 }

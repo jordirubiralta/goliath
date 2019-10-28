@@ -11,12 +11,13 @@ abstract class MaybeInteractor<T : Any>(
 
     fun execute(onSuccess: (T) -> Unit,
                 onEmpty: () -> Unit,
-                onError: (Throwable) -> Unit): Maybe<T> {
-        val maybe = buildMaybe()
+                onError: (Throwable) -> Unit,
+                maybe: Maybe<T>): Maybe<T> {
+        val maybeWithSchedulers = maybe
                 .subscribeOn(executor.new())
                 .observeOn(executor.main())
 
-        compositeDisposable.add(maybe
+        compositeDisposable.add(maybeWithSchedulers
                 .subscribeWith(object : DisposableMaybeObserver<T>() {
                     override fun onError(e: Throwable) {
                         onError(e)
@@ -31,12 +32,11 @@ abstract class MaybeInteractor<T : Any>(
                     }
                 }))
 
-        return maybe
+        return maybeWithSchedulers
     }
 
     fun clear() {
         compositeDisposable.clear()
     }
 
-    abstract fun buildMaybe(): Maybe<T>
 }

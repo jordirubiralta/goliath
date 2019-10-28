@@ -35,7 +35,7 @@ class HomeActivity
         bind<HomePresenter>() with provider {
             HomePresenterImpl(
                 view = this@HomeActivity,
-                getTransactionsUseCase = instance()
+                getTransactionsDBUseCase = instance()
             )
         }
     }
